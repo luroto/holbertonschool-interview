@@ -8,6 +8,12 @@ def canUnlockAll(boxes):
     '''
     This function determines if all the boxes in a list of lists can be opened
     '''
+    if isinstance(boxes, list) is False:
+        return (False)
+    for la in boxes:
+        if isinstance(la, list) is False:
+            return (False)
+
     keychain = boxes[0].copy()
     i = len(boxes)
 
