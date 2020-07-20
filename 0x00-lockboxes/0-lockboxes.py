@@ -24,9 +24,10 @@ def canUnlockAll(boxes):
     i = len(boxes)
 
     for key in keychain:
-        for llave in boxes[key]:
-            if llave < i and llave not in keychain:
-                keychain.append(llave)
+        if key < i:
+            for llave in boxes[key]:
+                if llave < i and llave not in keychain:
+                    keychain.append(llave)
 
     for j in range(1, i):
         if j not in keychain:
