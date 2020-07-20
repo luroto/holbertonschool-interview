@@ -12,7 +12,7 @@ def canUnlockAll(boxes):
         return (False)
     if len(boxes) == 0:
         return (False)
-    if len(boxes[0] == 0):
+    if len(boxes[0]) == 0:
         return (False)
     for la in boxes:
         if isinstance(la, list) is False:
