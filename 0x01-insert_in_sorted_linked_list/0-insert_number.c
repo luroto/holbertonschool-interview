@@ -26,12 +26,14 @@ listint_t *insert_node(listint_t **head, int number)
 	{
 		if (aux->next->n > number)
 		{
-			newnode->next = aux->next;
+			if (aux->next->next != NULL)
+				newnode->next = aux->next;
 			aux->next = newnode;
 			return (newnode);
 		}
 		aux = aux->next;
 	}
 	aux->next = newnode;
+	newnode->next = NULL;
 	return (newnode);
 }
