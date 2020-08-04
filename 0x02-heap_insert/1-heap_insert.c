@@ -13,6 +13,8 @@ heap_t *heap_insert(heap_t **root, int value)
 	if (*root == NULL)
 	{
 		newnode = binary_tree_node(*root, value);
+		if (newnode == NULL)
+			return (NULL);
 		*root = newnode;
 		return (*root);
 	}
@@ -20,6 +22,8 @@ heap_t *heap_insert(heap_t **root, int value)
 	index = i / 2;
 	parent = nthnode(root, index);
 	newnode = binary_tree_node(parent, value);
+	if (newnode == NULL)
+		return (NULL);
 	if (index * 2 == i)
 		parent->left = newnode;
 	else
