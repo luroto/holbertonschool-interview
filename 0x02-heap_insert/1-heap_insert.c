@@ -8,7 +8,7 @@
 heap_t *heap_insert(heap_t **root, int value)
 {
 	int size, i, index;
-	heap_t *newnode, *parent, *aux;
+	heap_t *newnode, *parent;
 
 	if (*root == NULL)
 	{
@@ -28,9 +28,13 @@ heap_t *heap_insert(heap_t **root, int value)
 		parent->left = newnode;
 	else
 		parent->right = newnode;
-	aux = newnode;
 	if (i >= 2)
-		checking_max(aux);
+		while (newnode->parent != NULL && newnode->n > newnode->parent->n)
+		{
+			newnode->n = newnode->parent->n;
+			newnode->parent->n = value;
+			newnode = newnode->parent;
+		}
 	return (newnode);
 }
 /**
@@ -79,28 +83,4 @@ heap_t *nthnode(heap_t **root, int index)
 		path--;
 	}
 	return (aux);
-}
-/**
- *checking_max - Swaps values if required
- *@nodo: Nodo that was added
- *Return: The node that was created
- *
- */
-heap_t *checking_max(heap_t *nodo)
-{
-	heap_t *newnode;
-	int i;
-
-	newnode = nodo;
-	while (newnode->parent != NULL)
-	{
-		if (newnode->n > newnode->parent->n)
-		{
-			i = newnode->parent->n;
-			newnode->parent->n = newnode->n;
-			newnode->n = i;
-		}
-		newnode = newnode->parent;
-	}
-	return (newnode);
 }
