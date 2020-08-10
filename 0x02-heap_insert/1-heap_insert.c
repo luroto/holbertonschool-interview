@@ -29,12 +29,15 @@ heap_t *heap_insert(heap_t **root, int value)
 	else
 		parent->right = newnode;
 	if (i >= 2)
-		while (newnode->parent != NULL && newnode->n > newnode->parent->n)
+	{
+		while (newnode->parent != NULL &&
+			newnode->n > newnode->parent->n)
 		{
 			newnode->n = newnode->parent->n;
 			newnode->parent->n = value;
 			newnode = newnode->parent;
 		}
+	}
 	return (newnode);
 }
 /**
@@ -49,7 +52,8 @@ size_t binary_tree_size(const binary_tree_t *tree)
 	itera = 0;
 	if (tree != NULL)
 	{
-		itera = 1 +  binary_tree_size(tree->left) + binary_tree_size(tree->right);
+		itera = 1 +  binary_tree_size(tree->left) +
+		binary_tree_size(tree->right);
 	}
 	return (itera);
 }
