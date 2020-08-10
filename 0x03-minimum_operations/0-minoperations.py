@@ -8,8 +8,11 @@ def minOperations(num):
     if isinstance(num, int) is False:
         return (0)
     min = 0
-    for i in range(2, num+1):
+    i = 2
+    while i <= num:
         while (num % i == 0):
             min += i
             num = num/i
+        else:
+            i += 1
     return (min)
