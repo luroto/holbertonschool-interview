@@ -1,4 +1,5 @@
 #include "lists.h"
+#include <stdio.h>
 /**
  * is_palindrome - Determines if a linked list is a palindrome
  * @head: Pointer to the entire linked list
@@ -21,7 +22,7 @@ int is_palindrome(listint_t **head)
 	aux = *head;
 	auxd = h;
 	while (auxd != NULL)
-		auxd = auxd->next;
+		auxd = auxd->next;	
 	while (auxd != NULL && aux != NULL)
 	{
 		if (auxd->n != aux->n)
@@ -54,7 +55,7 @@ dlistint_t *add_node_in_dlist(dlistint_t **head, int n)
 		return (*head);
 	}
 	aux = *head;
-	while (aux != NULL)
+	while (aux->next != NULL)
 		aux = aux->next;
 	aux->next = newnode;
 	newnode->prev = aux;
