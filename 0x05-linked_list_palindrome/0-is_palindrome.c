@@ -6,60 +6,73 @@
  */
 int is_palindrome(listint_t **head)
 {
-	int j, val;
+	dlistint_t *h, *auxd;
 	listint_t *aux;
 
 	if (*head == NULL)
 		return (1);
+	h = NULL;
 	aux = *head;
-	j = size_of_list(*head) - 1;
 	while (aux != NULL)
 	{
-		val = get_value_by_index(*head, j);
-		if (aux->n != val)
-			return (0);
-		j--;
+		add_node_in_dlist(&h, aux->n);
 		aux = aux->next;
 	}
+	aux = *head;
+	auxd = h;
+	while (auxd != NULL)
+		auxd = auxd->next;
+	while (auxd != NULL && aux != NULL)
+	{
+		if (auxd->n != aux->n)
+			return (0);
+		auxd = auxd->prev;
+		aux = aux->next;
+	}
+	free_dlist(h);
 	return (1);
 }
 /**
- * get_value_by_index - Get the value of idx index
- * @head: Pointer to the head of the linked list
- * @idx: Index to be retrieved
- * Return: The value of the node
+ * add_node_in_dlist - insert node in doubly linked list
+ * @head: Pointer to the entire strucure
+ * @n: Value to be inserted in the new node
+ * Return: Newnode, otherwise NULL
  */
-int get_value_by_index(listint_t *head, int idx)
+dlistint_t *add_node_in_dlist(dlistint_t **head, int n)
 {
-	int i = 0;
+	dlistint_t *newnode, *aux;
 
-	if (head == NULL)
-		return (0);
-	while (head != NULL)
+	newnode = malloc(sizeof(dlistint_t));
+	if (newnode == NULL)
+		return (NULL);
+	newnode->n = n;
+	newnode->next = NULL;
+	if (*head == NULL)
 	{
-		if (i == idx)
-		{
-			return (head->n);
-		}
-		i++;
-		head = head->next;
+		newnode->prev = NULL;
+		*head = newnode;
+		return (*head);
 	}
-	return (0);
+	aux = *head;
+	while (aux != NULL)
+		aux = aux->next;
+	aux->next = newnode;
+	newnode->prev = aux;
+	return (newnode);
 }
 /**
- * size_of_list - Gets the size of a linked list
- * @head: Pointer to the first node
- * Return: The entire size
+ * free_dlist - free a doubly linked list
+ * @h: Pointer to the first node
+ * Return: It's a void function
  */
-int size_of_list(listint_t *head)
+void free_dlist(dlistint_t *h)
 {
-	int i;
+	dlistint_t *aux;
 
-	i = 0;
-	while (head != NULL)
+	while (h != NULL)
 	{
-		i++;
-		head = head->next;
+		aux = h->next;
+		free(h);
+		h = aux;
 	}
-	return (i);
 }
