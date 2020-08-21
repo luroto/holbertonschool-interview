@@ -37,7 +37,7 @@ int is_palindrome(listint_t **head)
  * size_list - Gets the size of a list
  * @head: pointer to the first node of the structure
  * Return: Number of nodes
- */ 
+ */
 int size_list(listint_t *head)
 {
 	int i = 0;
@@ -53,8 +53,8 @@ int size_list(listint_t *head)
  * add_node_at_head - add nodes from the original list as stack
  * @head: Structure of the stack
  * @n: Number to be added
- *Return: The created node 
- */ 
+ *Return: The created node
+ */
 listint_t *add_node_at_head(listint_t **head, int n)
 {
 	listint_t *newnode;
