@@ -18,6 +18,6 @@ size_t print_listint(const listint_t *h);
 listint_t *add_nodeint_end(listint_t **head, const int n);
 void free_listint(listint_t *head);
 int is_palindrome(listint_t **head);
-listint_t *add_node_in_dlist(listint_t **head, int n);
-void free_dlist(listint_t *h);
+int size_list(listint_t *head);
+listint_t *add_node_at_head(listint_t **head, int n);
 #endif /* LISTS_H */

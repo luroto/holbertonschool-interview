@@ -1,5 +1,4 @@
 #include "lists.h"
-#include <stdio.h>
 /**
  * is_palindrome - Determines if a linked list is a palindrome
  * @head: Pointer to the entire linked list
@@ -7,36 +6,56 @@
  */
 int is_palindrome(listint_t **head)
 {
-	listint_t *h, *auxd, *aux;
+	listint_t *h = NULL, *aux = NULL, *aux2 = NULL;
+	int size = 0, half = 0, i = 0, pal = 1;
 
 	if (*head == NULL)
-		return (1);
-	h = NULL;
+		return (pal);
+	size = size_list(*head);
+	half = size / 2;
 	aux = *head;
-	while (aux != NULL)
+	while (i < half)
 	{
-		add_node_in_dlist(&h, aux->n);
+		i++;
+		add_node_at_head(&h, aux->n);
 		aux = aux->next;
 	}
-	aux = *head;
-	auxd = h;
-	while (auxd != NULL && aux != NULL)
-	{
-		if (auxd->n != aux->n)
-			return (0);
-		auxd = auxd->next;
+	if (size % 2 != 0)
 		aux = aux->next;
+	aux2 = h;
+	while (aux != NULL && aux2 != NULL)
+	{
+		if (aux->n != aux2->n)
+			pal = 0;
+		aux = aux->next;
+		aux2 = aux2->next;
 	}
-	free_dlist(h);
-	return (1);
+	free_listint(aux2);
+	return (pal);
 }
 /**
- * add_node_in_dlist - insert node in doubly linked list
- * @head: Pointer to the entire strucure
- * @n: Value to be inserted in the new node
- * Return: Newnode, otherwise NULL
- */
-listint_t *add_node_in_dlist(listint_t **head, int n)
+ * size_list - Gets the size of a list
+ * @head: pointer to the first node of the structure
+ * Return: Number of nodes
+ */ 
+int size_list(listint_t *head)
+{
+	int i = 0;
+
+	while (head != NULL)
+	{
+		i++;
+		head = head->next;
+	}
+	return (i);
+}
+/**
+ * add_node_at_head - add nodes from the original list as stack
+ * @head: Structure of the stack
+ * @n: Number to be added
+ *Return: The created node 
+ */ 
+listint_t *add_node_at_head(listint_t **head, int n)
 {
 	listint_t *newnode;
 
@@ -45,24 +64,6 @@ listint_t *add_node_in_dlist(listint_t **head, int n)
 		return (NULL);
 	newnode->n = n;
 	newnode->next = *head;
-	if (*head != NULL)
-		(*head)->next = newnode;
 	*head = newnode;
-	return (newnode);
-}
-/**
- * free_dlist - free a doubly linked list
- * @h: Pointer to the first node
- * Return: It's a void function
- */
-void free_dlist(listint_t *h)
-{
-	listint_t *aux;
-
-	while (h != NULL)
-	{
-		aux = h->next;
-		free(h);
-		h = aux;
-	}
+	return (*head);
 }
