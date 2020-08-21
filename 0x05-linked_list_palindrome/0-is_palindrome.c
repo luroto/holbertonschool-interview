@@ -12,6 +12,15 @@ int is_palindrome(listint_t **head)
 	if (*head == NULL)
 		return (pal);
 	size = size_list(*head);
+	if (size == 1)
+		return (pal);
+	if (size == 2)
+	{
+		if ((*head)->n != (*head)->next->n)
+			return (0);
+		else
+			return (pal);
+	}
 	half = size / 2;
 	aux = *head;
 	while (i < half)
