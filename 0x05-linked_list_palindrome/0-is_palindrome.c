@@ -32,14 +32,14 @@ int is_palindrome(listint_t **head)
 	if (size % 2 != 0)
 		aux = aux->next;
 	aux2 = h;
-	while (aux != NULL && aux2 != NULL)
+	while (aux != NULL)
 	{
 		if (aux->n != aux2->n)
 			pal = 0;
 		aux = aux->next;
 		aux2 = aux2->next;
 	}
-	free_listint(aux2);
+	free_listint(h);
 	return (pal);
 }
 /**
