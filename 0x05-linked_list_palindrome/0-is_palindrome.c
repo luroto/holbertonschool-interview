@@ -1,4 +1,5 @@
 #include "lists.h"
+#include <stdio.h>
 /**
  * is_palindrome - Determines if a linked list is a palindrome
  * @head: Pointer to the entire linked list
@@ -6,8 +7,7 @@
  */
 int is_palindrome(listint_t **head)
 {
-	listint_t *h = NULL, *aux = NULL, *aux2 = NULL;
-	int size = 0, half = 0, i = 0, pal = 1;
+	int size = 0, half = 0, pal = 1;
 
 	if (*head == NULL)
 		return (pal);
@@ -22,24 +22,7 @@ int is_palindrome(listint_t **head)
 			return (pal);
 	}
 	half = size / 2;
-	aux = *head;
-	while (i < half)
-	{
-		i++;
-		add_node_at_head(&h, aux->n);
-		aux = aux->next;
-	}
-	if (size % 2 != 0)
-		aux = aux->next;
-	aux2 = h;
-	while (aux != NULL)
-	{
-		if (aux->n != aux2->n)
-			pal = 0;
-		aux = aux->next;
-		aux2 = aux2->next;
-	}
-	free_listint(h);
+	pal = checking_palindrome(1, size, half, *head);
 	return (pal);
 }
 /**
@@ -59,20 +42,31 @@ int size_list(listint_t *head)
 	return (i);
 }
 /**
- * add_node_at_head - add nodes from the original list as stack
- * @head: Structure of the stack
- * @n: Number to be added
- *Return: The created node
+ *checking_palindrome -Recursive function that checks if a linked list is
+ *palindrome
+ *@start: Position of the first node to compare
+ *@tail: Position of the last node to compare
+ *@half: Position for the last node to be compared
+ *@head: First node of the structure
+ *Return: 1 if it is a palindrome, otherwise 0
  */
-listint_t *add_node_at_head(listint_t **head, int n)
+int checking_palindrome(int start, int tail, int half, listint_t *head)
 {
-	listint_t *newnode;
+	listint_t *aux = head;
+	int j = 0, h = 0, t = 0;
 
-	newnode = malloc(sizeof(listint_t));
-	if (newnode == NULL)
-		return (NULL);
-	newnode->n = n;
-	newnode->next = *head;
-	*head = newnode;
-	return (*head);
+	while (aux != NULL)
+	{
+		j++;
+		if (j == start)
+			h = aux->n;
+		if (j == tail)
+			t = aux->n;
+		aux = aux->next;
+	}
+	if (t != h)
+		return (0);
+	if (start == half)
+		return (1);
+	return (checking_palindrome(start + 1, tail - 1, half, head));
 }
