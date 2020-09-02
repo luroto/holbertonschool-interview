@@ -15,20 +15,16 @@ if __name__ == "__main__":
     try:
         for lines in sys.stdin:
             a = lines.split(" ")
-            if "\n" in a[-1]:
-                value = a[-1][:-1]
-            else:
-                value = a[-1]
-            if len(a) > 2 and a[-2] in codes and value.isnumeric() is True:
+            if len(a) > 2 and a[-2] in codes:
                 dictio[a[-2]] += 1
-                file_size += int(value)
+                file_size += int(a[-1])
                 i += 1
             if i % 10 == 0:
                 print("File size: {}".format(file_size))
                 for code in codes:
                     if dictio[code] > 0:
                         print("{}: {}".format(code, dictio[code]))
-
+        exit()
     except Exception:
         pass
     finally:
