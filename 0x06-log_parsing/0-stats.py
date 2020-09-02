@@ -24,7 +24,6 @@ if __name__ == "__main__":
                 for code in codes:
                     if dictio[code] > 0:
                         print("{}: {}".format(code, dictio[code]))
-        exit()
     except Exception:
         pass
     finally:
