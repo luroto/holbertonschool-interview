@@ -16,9 +16,10 @@ if __name__ == "__main__":
         for lines in sys.stdin:
             i += 1
             a = lines.split(" ")
-            if len(a) > 2 and a[-2] in codes:
-                dictio[a[-2]] += 1
+            if len(a) > 2:
                 file_size += int(a[-1])
+                if a[-2] in codes:
+                    dictio[a[-2]] += 1
             if i % 10 == 0:
                 print("File size: {}".format(file_size))
                 for code in codes:
