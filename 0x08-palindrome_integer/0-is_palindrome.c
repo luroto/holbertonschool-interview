@@ -6,7 +6,7 @@
  */
 int is_palindrome(unsigned long n)
 {
-	unsigned int temp, rev, last_digit;
+	unsigned long int temp, rev, last_digit;
 
 	temp = n;
 	rev = 0;
