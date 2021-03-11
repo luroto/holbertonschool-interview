@@ -18,7 +18,6 @@ def validUTF8(data):
 
     cont = 0
     status = False
-    
 
     for chara in data:
 
