@@ -27,15 +27,17 @@ def rain(array):
             if array[j] >= lowestWall and array[j] > 0:
                 highestWallIndex = j
                 highestWall = array[j]
-                """print("lowestWall {} on index {}, highestWall {}
-                on index {}".format(lowestWall, lowestWallIndex,
-                highestWall, highestWallIndex))"""
-                height = highestWall - lowestWall
-                width = highestWallIndex - lowestWallIndex
-                """print("height {}, width {}, bloques
-                {}".format(height, width, bloques))"""
+                height = lowestWall
+                width = highestWallIndex - lowestWallIndex - 1
                 water.append((height * width) - bloques)
-                """print(water)"""
+                if highestWallIndex == endofArray - 1:
+                    i = highestWallIndex
+                    break
+                if array[highestWallIndex + 1] == 0
+                or array[highestWallIndex + 1] < array[highestWallIndex]:
+                    i = highestWallIndex - 1
+                else:
+                    i = highestWallIndex
                 break
             bloques += array[j]
         i += 1
