@@ -33,8 +33,8 @@ def rain(array):
                 if highestWallIndex == endofArray - 1:
                     i = highestWallIndex
                     break
-                if array[highestWallIndex + 1] == 0
-                or array[highestWallIndex + 1] < array[highestWallIndex]:
+                if (array[highestWallIndex + 1] == 0 or
+                        array[highestWallIndex + 1] < array[highestWallIndex]):
                     i = highestWallIndex - 1
                 else:
                     i = highestWallIndex
