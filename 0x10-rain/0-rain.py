@@ -18,7 +18,9 @@ def rain(array):
         i = 0
     water = []
     while i < endofArray:
-        while array[i] == 0:
+        while array[i] == 0 and i != endofArray:
+            if i == endofArray - 1:
+                break
             i += 1
         lowestWallIndex = i
         lowestWall = array[i]
@@ -26,7 +28,6 @@ def rain(array):
         for j in range(i + 1, endofArray):
             if array[j] >= lowestWall and array[j] > 0:
                 highestWallIndex = j
-                highestWall = array[j]
                 height = lowestWall
                 width = highestWallIndex - lowestWallIndex - 1
                 water.append((height * width) - bloques)
