@@ -22,6 +22,7 @@ void building_heap(int *array, int size, int index)
 	if (max != index)
 	{
 		swapping(&array[index], &array[max]);
+		print_array(array, size);
 		building_heap(array, size, max);
 	}
 }
@@ -52,9 +53,9 @@ void heap_sort(int *array, size_t size)
 
 	for (i = size - 1; i > 0; i--)
 	{
-		swapping(&array[0], &array[i]);
-		print_array(array, size);
-		building_heap(array, i, 0);
+			swapping(&array[0], &array[i]);
+			print_array(array, size);
+			building_heap(array, i, 0);
 	}
 
 }
