@@ -14,7 +14,7 @@ void building_heap(int *array, int size, int index)
 	right = 2 * index + 2;
 
 	if (left < size && array[left] > array[max])
-		max = 1;
+		max = left;
 
 	if (right < size && array[right] > array[max])
 		max = right;
